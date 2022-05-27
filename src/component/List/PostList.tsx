@@ -2,21 +2,14 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { PostProps, PostsProps } from '../../types/type';
 import PostInfo from './PostInfo';
-import axios from "axios";
+import UserActivity from './UserActivity';
 import Link from 'next/link';
 
-const PostList: FunctionComponent<PostsProps> = () => {
+const PostList: FunctionComponent<PostsProps> = ({ posts }: PostsProps) => {
 
-  const [posts, setPosts] = useState<PostProps[]>([])
-
-  const fetchPosts = async () => {
-    const postList = await axios.get("http://localhost:4000/posts")
-    setPosts(postList.data)
-  }
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
+  // 포스팅 최신글이 상단으로 가도록 정렬
+  posts.sort((a, b) =>
+    new Date(b.writtenAt).getTime() - new Date(a.writtenAt).getTime())
 
   return (
     <PostListWrapper>
@@ -39,7 +32,7 @@ const PostList: FunctionComponent<PostsProps> = () => {
             imageUrl = imageUrl[0]
           }
           return (
-            <PostWrapper>
+            <PostWrapper key={index}>
               <Link href={`/community/post/${id}`}>
                 <a>
                   <PostInfo writerNickName={writerNickName} categoryName={categoryName} title={title} writtenAt={writtenAt} />
@@ -49,7 +42,7 @@ const PostList: FunctionComponent<PostsProps> = () => {
                   }
                 </a>
               </Link>
-              {/* <UserActivity viewCount={viewCount} likeCount={likeCount} commentCount={commentCount} /> */}
+              <UserActivity viewCount={viewCount} likeCount={likeCount} commentCount={commentCount} />
               <Contour />
             </PostWrapper>
           )
