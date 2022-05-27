@@ -1,17 +1,34 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useState, useEffect } from 'react'
 import styled from '@emotion/styled'
+import { CategoriesProps, CategoryProps } from '../../types/type';
 
-const CategoryList: FunctionComponent = () => {
+const CategoryList: FunctionComponent<CategoriesProps> = ({ currentCategory }: CategoriesProps) => {
   const [categories, setCategories] = useState([
-    "React", "Vue", "Angular", "JavaScript", "TypeScript", "Redux"
+    "전체글", "인기글", "React", "Vue", "Angular", "JavaScript", "TypeScript", "Redux"
   ])
+  // 처음 렌더링 시 맨 처음 카테고리가 checked 되게 
+  useEffect(() => {
+    let tag = document.querySelector('input[type=checkbox]')
+    tag.setAttribute('checked', 'true')
+  }, [])
+
+  const handleCategory = (event: any) => {
+    currentCategory(event.target.innerHTML)
+
+    document
+      .querySelectorAll(`input[type=checkbox]`)
+      .forEach((category) => (category as HTMLInputElement).checked = false);
+
+    event.checked = true;
+  }
+
   return (
     <CategoryListWrapper>
-      {categories.map((category, index) => {
+      {categories.map((category, categoryPk, index) => {
         return (
-          <CategoryWrapper>
-            <CategoryMenu />
-            <CategoryLabel>
+          <CategoryWrapper key={categoryPk}>
+            <CategoryMenu id={"checkbox" + categoryPk} type="checkbox" />
+            <CategoryLabel htmlFor={"checkbox" + categoryPk} onClick={handleCategory}>
               {category}
             </CategoryLabel>
           </CategoryWrapper>)
