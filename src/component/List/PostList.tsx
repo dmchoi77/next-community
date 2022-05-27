@@ -35,15 +35,16 @@ const PostList: FunctionComponent<PostsProps> = ({ posts }: PostsProps) => {
             <PostWrapper key={index}>
               <Link href={`/community/post/${id}`}>
                 <a>
-                  <PostInfo writerNickName={writerNickName} categoryName={categoryName} title={title} writtenAt={writtenAt} />
+                  <PostInfo writerProfileUrl={writerProfileUrl} writerNickName={writerNickName} categoryName={categoryName} title={title} writtenAt={writtenAt} />
+                  <PostTitle>{title}</PostTitle>
                   <Content>{content}</Content>
                   {imageUrl ?
-                    <Image src={imageUrl} /> : null
+                    <ContentImage src={imageUrl} /> : null
                   }
                 </a>
               </Link>
               <UserActivity viewCount={viewCount} likeCount={likeCount} commentCount={commentCount} />
-              <Contour />
+              <Divider />
             </PostWrapper>
           )
         })
@@ -63,6 +64,21 @@ const PostListWrapper = styled.div`
 const PostWrapper = styled.div`
   height: auto;
   width: 100%;
+`
+const PostTitle = styled.div`
+  height: 21px;
+  left: 7.78%;
+  right: 13.33%;
+  top: calc(50% - 21px/2 - 183px);
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const Content = styled.div`
@@ -84,14 +100,14 @@ const Content = styled.div`
   -webkit-box-orient: vertical;
 `
 
-const Image = styled.img`
+const ContentImage = styled.img`
   width: 100%;
   height: 160px;
   border-radius: 4px;
   object-fit: cover;
 `
 
-const Contour = styled.p`
+const Divider = styled.p`
   height: 3px;
   background-color: #E8E8E8;
   // left: -26px;

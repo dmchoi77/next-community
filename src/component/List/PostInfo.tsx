@@ -1,11 +1,11 @@
 // 포스팅 정보(작성자, 카테고리, 작성시간, 제목)
 // UPDATE: 2022-05-27
 
-import React, { FunctionComponent } from 'react'
+import React, { Fragment, FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { PostInfoProps } from '../../types/type';
 
-const PostInfo: FunctionComponent<PostInfoProps> = ({ writerNickName, categoryName, title, writtenAt }) => {
+const PostInfo: FunctionComponent<PostInfoProps> = ({ writerProfileUrl, writerNickName, categoryName, writtenAt }) => {
 
   function calculatingTime(time: string) {
     const currentTime = new Date().getTime();
@@ -33,14 +33,32 @@ const PostInfo: FunctionComponent<PostInfoProps> = ({ writerNickName, categoryNa
 
   return (
     <>
-      <PostWriter>{writerNickName}</PostWriter>
-      <Category>{categoryName} ・ {calculatingTime(writtenAt)}</Category>
-      <PostTitle>{title}</PostTitle>
+      <PostInfoContainer>
+        <ProfileImage src={writerProfileUrl} />
+        <PostInfoWrapper>
+          <PostWriter>{writerNickName}</PostWriter>
+          <Category>{categoryName} ・ {calculatingTime(writtenAt)}</Category>
+        </PostInfoWrapper>
+      </PostInfoContainer>
     </>
   )
 }
 export default PostInfo
 
+const PostInfoContainer = styled.div`
+  display: flex;
+  gap: 12px;
+`
+
+const PostInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const ProfileImage = styled.img`
+  width: 40px;
+  height: 40px;
+`
 
 const PostWriter = styled.p`
   height: 12px;
@@ -67,20 +85,4 @@ const Category = styled.p`
   line-height: 12px;
   color: #B4B4B4;
   margin: 0 0 19px;
-`
-
-const PostTitle = styled.div`
-  height: 21px;
-  left: 7.78%;
-  right: 13.33%;
-  top: calc(50% - 21px/2 - 183px);
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 21px;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 `
