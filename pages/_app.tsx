@@ -1,5 +1,5 @@
-import { AppProps } from 'next/app'
-import { globalStyles } from '../styles/style'
+import { AppProps } from 'next/app';
+import { globalStyles } from '../styles/style';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -7,7 +7,7 @@ function App({ Component, pageProps }: AppProps) {
       {globalStyles}
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

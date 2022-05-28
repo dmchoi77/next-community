@@ -1,15 +1,11 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from 'react';
+import styled from '@emotion/styled';
 
 function Header() {
-  return (
-    <HeaderWrapper>
-      커뮤니티
-    </HeaderWrapper>
-  )
+  return <HeaderWrapper>커뮤니티</HeaderWrapper>;
 }
 
-export default Header
+export default Header;
 
 const HeaderWrapper = styled.header`
   width: 81px;
@@ -17,5 +13,4 @@ const HeaderWrapper = styled.header`
   margin: 34px 22px 20px;
   font-size: 23px;
   font-weight: bold;
-`
-
+`;

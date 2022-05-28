@@ -7,9 +7,10 @@ const SkeletonUI: FunctionComponent = () => {
       <img src="/images/skeletonUI.png" />
       <img src="/images/skeletonUI.png" />
       <img src="/images/skeletonUI.png" />
+      <img src="/images/skeletonUI.png" />
     </Wrapper>
-  )
-}
+  );
+};
 
 export default SkeletonUI;
 
@@ -20,4 +21,4 @@ const Wrapper = styled.div`
   img {
     width: 100%;
   }
-`
+`;

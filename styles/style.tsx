@@ -1,24 +1,23 @@
 // GlobalStyle
 // UPDATE :
-import { css, Global, keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
+import { css, Global, keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 
 export const globalStyles = (
   <Global
     styles={css`
-  html,
-  body {
-    // width: 100vh;
-  }
+      html,
+      body {
+        // width: 100vh;
+      }
 
-  * {
-    text-decoration: none;
-  }
+      * {
+        text-decoration: none;
+      }
 
-  a {
-    color:black;
-  }
-
-  `}
+      a {
+        color: black;
+      }
+    `}
   />
 );
