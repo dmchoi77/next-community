@@ -4,15 +4,19 @@ import CategoryList from "../src/component/List/CategoryList";
 import PostList from "../src/component/List/PostList";
 import axios from "axios";
 import { PostProps } from "../src/types/type";
+import Head from "next/head";
+import SkeletonUI from "../src/component/List/SkeletonUI";
 
 const Home: FunctionComponent = () => {
   const [posts, setPosts] = useState<PostProps[]>([])
   const [selectingPosts, setSelectingPosts] = useState<PostProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchPosts = async () => {
     const postList = await axios.get("http://localhost:4000/posts")
     setPosts(postList.data)
     setSelectingPosts(postList.data)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -36,9 +40,13 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
+      <Head>
+        <title>dmchoi</title>
+      </Head>
       <Header />
       <CategoryList currentCategory={currentCategory} />
-      <PostList posts={selectingPosts} />
+      {isLoading && <SkeletonUI />}
+      {!isLoading && <PostList posts={selectingPosts} />}
     </>
   );
 }
