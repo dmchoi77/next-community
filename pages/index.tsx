@@ -6,6 +6,7 @@ import axios from 'axios';
 import { PostProps } from '../src/types/type';
 import Head from 'next/head';
 import SkeletonUI from '../src/component/List/SkeletonUI';
+import PostButton from '../src/component/List/PostButton';
 
 const Home: FunctionComponent = () => {
   const [posts, setPosts] = useState<PostProps[]>([]);
@@ -47,6 +48,7 @@ const Home: FunctionComponent = () => {
       <CategoryList currentCategory={currentCategory} />
       {isLoading && <SkeletonUI />}
       {!isLoading && <PostList posts={selectingPosts} />}
+      <PostButton />
     </>
   );
 };
