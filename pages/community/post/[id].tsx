@@ -1,6 +1,7 @@
 // 포스팅 상세 페이지 PostDetail
 // UPDATE: 2022-05-28
 
+import Head from 'next/head';
 import React from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
@@ -12,6 +13,10 @@ const Post = ({ post }) => {
   const router = useRouter();
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.content}></meta>
+      </Head>
       <HeaderWrapper>
         <HeaderButton
           onClick={() => {
@@ -40,6 +45,7 @@ const Post = ({ post }) => {
           categoryName={post.categoryName}
           writtenAt={post.writtenAt}
         />
+        <PostTitle>{post.title}</PostTitle>
         <PostContentWrapper>{post.content}</PostContentWrapper>
         {post.imageUrl !== null && typeof post.imageUrl === 'object' ? (
           post.imageUrl.map((image, index) => {
@@ -84,17 +90,23 @@ const HeaderButton = styled.button`
   border: none;
   cursor: pointer;
 `;
-// const HeaderContent = styled.div`
-//   font-weight: 700;
-//   font-size: 14px;
-//   line-height: 14px;
-
-//   color: #B4B4B4;
-// `
 
 const PostDetailWrapper = styled.div`
   margin: 25px;
 `;
+
+const PostTitle = styled.div`
+  height: 21px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
 
 const PostContentWrapper = styled.div`
   margin: 10px 0;
