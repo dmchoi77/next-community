@@ -47,7 +47,7 @@ const Home: FunctionComponent = () => {
       <Header />
       <CategoryList currentCategory={currentCategory} />
       {isLoading && <SkeletonUI />}
-      {!isLoading && <PostList posts={selectingPosts} />}
+      {!isLoading && <PostList posts={selectingPosts} selectedCategory={currentCategory} />}
       <PostButton />
     </>
   );

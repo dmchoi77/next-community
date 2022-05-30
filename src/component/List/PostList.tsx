@@ -4,16 +4,17 @@ import { PostProps, PostsProps } from '../../types/type';
 import PostInfo from './PostInfo';
 import UserActivity from './UserActivity';
 import Link from 'next/link';
+import useInfifitiScroll from '../../hooks/useInfiniteScroll';
 
-const PostList: FunctionComponent<PostsProps> = ({ posts }: PostsProps) => {
+const PostList: FunctionComponent<PostsProps> = ({ posts, selectedCategory }: PostsProps) => {
   // 포스팅 최신글이 상단으로 가도록 정렬
   posts.sort(
     (a, b) => new Date(b.writtenAt).getTime() - new Date(a.writtenAt).getTime()
   );
-
+  const { containerRef, postList } = useInfifitiScroll(selectedCategory, posts);
   return (
-    <PostListWrapper>
-      {posts.map(
+    <PostListWrapper ref={containerRef}>
+      {postList.map(
         (
           {
             categoryPk,
