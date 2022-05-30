@@ -7,13 +7,13 @@ const PostButton = () => {
   const handleButtonClick = (e) => {
     e.preventDefault();
     router.push('/community/post/new');
-  }
+  };
   return (
     <ButtonWrapper onClick={handleButtonClick}>
       <WriteButton>글쓰기</WriteButton>
     </ButtonWrapper>
-  )
-}
+  );
+};
 
 export default PostButton;
 
@@ -27,7 +27,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 16px;
-`
+`;
 
 const WriteButton = styled.button`
   padding: 14px 16px;
@@ -39,10 +39,10 @@ const WriteButton = styled.button`
 
   width: fit-content;
   height: 52px;
-  background: #2C7FFF;
+  background: #7c27eb;
   border-radius: 8px;
   border: transparent;
   color: #ffff;
 
   cursor: pointer;
-`
+`;

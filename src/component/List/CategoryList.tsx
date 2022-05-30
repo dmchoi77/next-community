@@ -95,7 +95,7 @@ const CategoryMenu = styled.input`
   cursor: pointer;
 
   &:checked + ${CategoryLabel} {
-    background: #2c7fff;
+    background: #7c27eb;
     border-radius: 20px;
     color: #ffff;
   }
