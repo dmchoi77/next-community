@@ -28,6 +28,7 @@ export type PostProps = {
 
 export type PostsProps = {
   posts: PostProps[];
+  selectedCategory: any;
 };
 
 export type PostInfoProps = {
