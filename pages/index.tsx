@@ -7,6 +7,7 @@ import { PostProps } from '../src/types/type';
 import Head from 'next/head';
 import SkeletonUI from '../src/component/List/SkeletonUI';
 import PostButton from '../src/component/List/PostButton';
+import TopButton from '../src/component/List/TopButton';
 
 const Home: FunctionComponent = () => {
   const [posts, setPosts] = useState<PostProps[]>([]);
@@ -24,7 +25,7 @@ const Home: FunctionComponent = () => {
     fetchPosts();
   }, []);
 
-  const currentCategory = (selectedCategory: any) => {
+  const currentCategory = (selectedCategory: any): void => {
     let selectedPosts;
 
     if (selectedCategory === '전체글') {
@@ -47,7 +48,10 @@ const Home: FunctionComponent = () => {
       <Header />
       <CategoryList currentCategory={currentCategory} />
       {isLoading && <SkeletonUI />}
-      {!isLoading && <PostList posts={selectingPosts} selectedCategory={currentCategory} />}
+      {!isLoading && (
+        <PostList posts={selectingPosts} selectedCategory={currentCategory} />
+      )}
+      <TopButton />
       <PostButton />
     </>
   );
