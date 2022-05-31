@@ -2,22 +2,22 @@ import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-const PostButton = () => {
+const PostButton: FunctionComponent = () => {
   const router = useRouter();
   const handleButtonClick = (e) => {
     e.preventDefault();
     router.push('/community/post/new');
   };
   return (
-    <ButtonWrapper onClick={handleButtonClick}>
-      <WriteButton>글쓰기</WriteButton>
-    </ButtonWrapper>
+    <PostButtonWrapper onClick={handleButtonClick}>
+      <Button alt="post-button" src="/images/post.png" />
+    </PostButtonWrapper>
   );
 };
 
 export default PostButton;
 
-const ButtonWrapper = styled.div`
+const PostButtonWrapper = styled.div`
   width: 100%;
 
   position: fixed;
@@ -29,18 +29,13 @@ const ButtonWrapper = styled.div`
   margin: 16px;
 `;
 
-const WriteButton = styled.button`
-  padding: 14px 16px;
+const Button = styled.img`
+  padding: 10px;
 
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-
-  width: fit-content;
-  height: 52px;
+  width: 30px;
+  height: 30px;
   background: #7c27eb;
-  border-radius: 8px;
+  border-radius: 83%;
   border: transparent;
   color: #ffff;
 
