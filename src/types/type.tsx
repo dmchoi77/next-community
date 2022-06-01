@@ -1,17 +1,17 @@
 // type들을 따로 관리
-// UPDATE: 2022-05-27
+// UPDATE: 2022-06-01
 
-export type CategoryProps = {
+export interface CategoryProps {
   categoryPk: number;
   categoryCode: string;
   categoryName: string;
 };
 
-export type CategoriesProps = {
+export interface CategoriesProps {
   currentCategory: any;
 };
 
-export type PostProps = {
+export interface PostProps {
   categoryPk: number;
   categoryName: string;
   id: number;
@@ -26,19 +26,19 @@ export type PostProps = {
   writerProfileUrl: string;
 };
 
-export type PostsProps = {
+export interface PostsProps {
   posts: PostProps[];
   selectedCategory: any;
 };
 
-export type PostInfoProps = {
+export interface PostInfoProps {
   writerProfileUrl: string;
   writerNickName: string;
   categoryName: string;
   writtenAt: string;
 };
 
-export type UserActivityProps = {
+export interface UserActivityProps {
   viewCount?: number;
   likeCount: number;
   commentCount: number;
