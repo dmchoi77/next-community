@@ -31,7 +31,7 @@ const Button = styled.img`
   height: 30px;
 
   border-radius: 83%;
-  border: 1px solid #020202;
+  border: 1px solid #02020287;
   background: #ffffff;
 
   cursor: pointer;

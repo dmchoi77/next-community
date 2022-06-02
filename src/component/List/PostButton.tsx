@@ -37,7 +37,6 @@ const Button = styled.img`
   background: #7c27eb;
   border-radius: 83%;
   border: transparent;
-  color: #ffff;
 
   cursor: pointer;
 `;

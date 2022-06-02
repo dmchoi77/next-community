@@ -219,6 +219,8 @@ const ContentInput = styled.textarea`
   font-size: 14px;
   line-height: 24px;
 
+  border-bottom: 1px solid #e8e8e8;
+  
   input:placeholder {
     color: #b4b4b4;
   }
