@@ -1,14 +1,10 @@
-import { MutableRefObject, useRef, useState, useEffect } from 'react'
+import { MutableRefObject, useRef, useState, useEffect } from 'react';
 
 const NUMBER_OF_ITEMS_PER_PAGE = 4;
 
-const useInfiniteScroll = function (
-  selectedCategory,
-  postList
-) {
-  const containerRef: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(
-    null,
-  )
+const useInfiniteScroll = function (selectedCategory, postList) {
+  const containerRef: MutableRefObject<HTMLDivElement | null> =
+    useRef<HTMLDivElement>(null);
 
   const [count, setCount] = useState<number>(1);
 
@@ -16,28 +12,28 @@ const useInfiniteScroll = function (
     (entries, observer) => {
       if (!entries[0].isIntersecting) return;
 
-      setCount(value => value + 1);
+      setCount((value) => value + 1);
       observer.disconnect();
-    },
-  )
+    }
+  );
 
-  useEffect(() => setCount(1), [selectedCategory])
+  useEffect(() => setCount(1), [selectedCategory]);
   useEffect(() => {
     if (
       NUMBER_OF_ITEMS_PER_PAGE * count >= postList.length ||
       containerRef.current === null ||
       containerRef.current.children.length === 0
     )
-      return
+      return;
     observer.observe(
-      containerRef.current.children[containerRef.current.children.length - 1],
-    )
-  }, [count, selectedCategory])
+      containerRef.current.children[containerRef.current.children.length - 1]
+    );
+  }, [count, selectedCategory]);
 
   return {
     containerRef,
-    postList: postList.slice(0, count * NUMBER_OF_ITEMS_PER_PAGE)
-  }
-}
+    postList: postList.slice(0, count * NUMBER_OF_ITEMS_PER_PAGE),
+  };
+};
 
-export default useInfiniteScroll
+export default useInfiniteScroll;
