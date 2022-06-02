@@ -1,11 +1,12 @@
 // 새 포스팅 페이지
-// UPDATE: 2022-05-30
+// UPDATE: 2022-06-02
 
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { CategoryProps } from '../../../src/types/type';
 import axios from 'axios';
 import UploadImages from '../../../src/component/PostNew/UploadImages';
+import CategoryBox from '../../../src/component/PostNew/CategoryBox';
+import { useRouter } from 'next/router';
 
 const PostNew: FunctionComponent = () => {
   const [categoryPk, setCategoryPk] = useState(0);
@@ -13,6 +14,7 @@ const PostNew: FunctionComponent = () => {
   const [title, setTitle] = useState<string>();
   const [content, setContent] = useState<string>();
   const [images, setImages] = useState<[]>([]);
+  const router = useRouter();
 
   const onTitleChange = (e: any) => {
     setTitle(e.target.value);
@@ -41,6 +43,13 @@ const PostNew: FunctionComponent = () => {
     temp.splice(selectedIndex, 1);
 
     setImages(temp);
+  };
+
+
+  const categoryHandler = () => {
+    let selecting: any = document.getElementById('categories');
+    setCategoryPk(selecting.options[selecting.selectedIndex].value);
+    setCategoryName(selecting.options[selecting.selectedIndex].innerHTML);
   };
 
   const onPost = async () => {
@@ -82,7 +91,10 @@ const PostNew: FunctionComponent = () => {
     } catch (err) {
       console.error(err);
     }
+
+    router.push("/");
   };
+
 
   return (
     <PostNewWrapper>
@@ -91,8 +103,7 @@ const PostNew: FunctionComponent = () => {
       </HeaderWrapper>
       <CategoryBoxWrapper>
         <CategoryBox
-          setCategoryPk={setCategoryPk}
-          setCategoryName={setCategoryName}
+          categoryHandler={categoryHandler}
         />
       </CategoryBoxWrapper>
       <TitleInput
@@ -110,49 +121,15 @@ const PostNew: FunctionComponent = () => {
         onRemoveImage={onRemoveImage}
         onAddImages={onAddImages}
       />
+      <FooterWrapper>
+        <CancelButton onClick={() => router.push("/")}>취소</CancelButton>
+        <WriteButton onClick={() => onPost()}>작성</WriteButton>
+      </FooterWrapper>
     </PostNewWrapper>
   );
 };
 
 export default PostNew;
-
-const CategoryBox = ({ setCategoryPk, setCategoryName }: any) => {
-  const [categories, setCategories] = useState<CategoryProps[]>([]);
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:4000/categories')
-      .then((res) => setCategories(res.data.splice(2, res.data.length)));
-  }, []);
-
-  const categoryHandler = () => {
-    let selecting: any = document.getElementById('categories');
-    setCategoryPk(selecting.options[selecting.selectedIndex].value);
-    setCategoryName(selecting.options[selecting.selectedIndex].innerHTML);
-  };
-
-  return (
-    <select
-      name="categories"
-      id="categories"
-      onChange={categoryHandler}
-      style={{
-        fontWeight: '700',
-        fontSize: '14px',
-        lineHeight: '24px',
-        border: 'none',
-      }}
-    >
-      {categories.map((category) => {
-        return (
-          <option key={category.categoryPk} value={category.categoryPk}>
-            {category.categoryName}
-          </option>
-        );
-      })}
-    </select>
-  );
-};
 
 const PostNewWrapper = styled.div`
   display: flex;
@@ -220,8 +197,42 @@ const ContentInput = styled.textarea`
   line-height: 24px;
 
   border-bottom: 1px solid #e8e8e8;
-  
+
   input:placeholder {
     color: #b4b4b4;
   }
 `;
+
+const FooterWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+
+  padding-top: 15px;
+`
+
+const CancelButton = styled.button`
+  width: 180px;
+  height: 50px;
+
+  border: 0.7px solid #60606075;
+  border-radius: 19px;
+
+  background-color: #ffff;
+
+  font-weight: 500;
+  font-size: 14px;
+`
+
+const WriteButton = styled.button`
+  width: 180px;
+  height: 50px;
+
+  border: transparent;
+  border-radius: 19px;
+
+  background-color: #7c27eb;
+
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffff;
+`
