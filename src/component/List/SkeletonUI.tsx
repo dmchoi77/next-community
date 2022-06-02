@@ -8,6 +8,7 @@ const SkeletonUI: FunctionComponent = () => {
       <img src="/images/skeletonUI.png" />
       <img src="/images/skeletonUI.png" />
       <img src="/images/skeletonUI.png" />
+      <img src="/images/skeletonUI.png" />
     </Wrapper>
   );
 };
@@ -18,7 +19,10 @@ const Wrapper = styled.div`
   height: 100vh;
   margin: 0 26px;
 
+  display: flex;
+  flex-direction: column;
+
   img {
-    width: 100%;
+    width: 360px;
   }
 `;
