@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { PostProps, PostsProps } from '../../types/type';
 import PostInfo from './PostInfo';
@@ -6,7 +6,10 @@ import UserActivity from './UserActivity';
 import Link from 'next/link';
 import useInfifitiScroll from '../../hooks/useInfiniteScroll';
 
-const PostList: FunctionComponent<PostsProps> = ({ posts, selectedCategory }: PostsProps) => {
+const PostList: FunctionComponent<PostsProps> = ({
+  posts,
+  selectedCategory,
+}: PostsProps) => {
   // 포스팅 최신글이 상단으로 가도록 정렬
   posts.sort(
     (a, b) => new Date(b.writtenAt).getTime() - new Date(a.writtenAt).getTime()
@@ -74,7 +77,7 @@ const PostListWrapper = styled.div`
 
 const PostWrapper = styled.div`
   height: auto;
-  width: 100%;
+  // width: 360px;
 `;
 const PostTitle = styled.div`
   height: 21px;

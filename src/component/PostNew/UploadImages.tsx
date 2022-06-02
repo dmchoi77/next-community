@@ -46,7 +46,7 @@ const UploadImages = ({
           onChange={onAddImages}
         />
         <ImageCount>
-          이미지 첨부({images.length}/{6})
+          이미지 첨부({images.length}/{5})
         </ImageCount>
       </AttachWrapper>
     </>
@@ -93,7 +93,7 @@ const ImagesWrapper = styled.div`
   justify-content: flex-start
 
   padding-left: 20px;
-  gap: 16px;
+  gap: 3px;
 
   display: flex;
   overflow-y: scroll;
