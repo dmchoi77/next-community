@@ -1,5 +1,5 @@
 // type들을 따로 관리
-// UPDATE: 2022-06-01
+// UPDATE: 2022-06-04
 
 export interface CategoryProps {
   categoryPk: number;
@@ -36,6 +36,7 @@ export interface PostInfoProps {
   writerNickName: string;
   categoryName: string;
   writtenAt: string;
+  id?: number;
 };
 
 export interface UserActivityProps {
