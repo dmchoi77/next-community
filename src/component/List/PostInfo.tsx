@@ -1,16 +1,39 @@
 // 포스팅 정보(작성자, 카테고리, 작성시간, 제목)
-// UPDATE: 2022-05-27
+// UPDATE: 2022-06-05
 
-import React, { Fragment, FunctionComponent } from 'react';
+import React, {
+  FunctionComponent,
+  useRef,
+  useState,
+  useEffect
+} from 'react';
 import styled from '@emotion/styled';
 import { PostInfoProps } from '../../types/type';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const PostInfo: FunctionComponent<PostInfoProps> = ({
   writerProfileUrl,
   writerNickName,
   categoryName,
   writtenAt,
+  id,
 }) => {
+  const [isClick, setIsClick] = useState(false);
+  const menuEl = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const router = useRouter();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+  // 메뉴 외부 영역 클릭시 메뉴 닫힘
+  const handleClickOutside = (e) => {
+    if (isClick && !menuEl.current.contains(e.target)) setIsClick(false);
+  };
+
   function calculatingTime(time: string) {
     const currentTime = new Date().getTime();
     const writtenTime = new Date(time).getTime();
@@ -37,6 +60,13 @@ const PostInfo: FunctionComponent<PostInfoProps> = ({
     if (estimatedTimeHour >= 24) return time.slice(0, 10);
   }
 
+  const handleRemovePost = (e: any) => {
+    axios.delete(`http://localhost:4000/posts/${id}`);
+
+    alert('삭제되었습니다.');
+    router.push('/');
+  };
+
   return (
     <>
       <PostInfoContainer>
@@ -47,11 +77,40 @@ const PostInfo: FunctionComponent<PostInfoProps> = ({
             {categoryName} ・ {calculatingTime(writtenAt)}
           </Category>
         </PostInfoWrapper>
+        <MenuButtonWrapper>
+          <MenuButton
+            src="/images/menu-dots-vertical.png"
+            onClick={() => setIsClick(true)}
+          />
+          {isClick && (
+            <OpenMenu ref={menuEl} onClick={handleRemovePost}>
+              삭제하기
+            </OpenMenu>
+          )}
+        </MenuButtonWrapper>
       </PostInfoContainer>
     </>
   );
 };
 export default PostInfo;
+
+const OpenMenu = styled.p`
+  position: absolute;
+  width: 59px;
+  top: -14px;
+  left: -30px;
+
+  background-color: #cecece;
+  color: black;
+
+  font-size: 10px;
+
+  border-radius: 3px;
+
+  text-align: center;
+
+  padding: 5px;
+`;
 
 const PostInfoContainer = styled.div`
   display: flex;
@@ -61,6 +120,7 @@ const PostInfoContainer = styled.div`
 const PostInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 220px;
 `;
 
 const ProfileImage = styled.img`
@@ -93,4 +153,18 @@ const Category = styled.p`
   line-height: 12px;
   color: #b4b4b4;
   margin: 0 0 19px;
+`;
+
+const MenuButtonWrapper = styled.div`
+  position: relative;
+
+  height: 0px;
+`;
+const MenuButton = styled.img`
+  width: 28px;
+  height: 28px;
+  background-color: transparent;
+
+  filter: invert(50%);
+  transform: rotate(90deg);
 `;
