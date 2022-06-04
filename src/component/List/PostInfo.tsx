@@ -78,10 +78,12 @@ const PostInfo: FunctionComponent<PostInfoProps> = ({
           </Category>
         </PostInfoWrapper>
         <MenuButtonWrapper>
-          <MenuButton
-            src="/images/menu-dots-vertical.png"
-            onClick={() => setIsClick(true)}
-          />
+          {id &&
+            <MenuButton
+              src="/images/menu-dots-vertical.png"
+              onClick={() => setIsClick(true)}
+            />
+          }
           {isClick && (
             <OpenMenu ref={menuEl} onClick={handleRemovePost}>
               삭제하기
@@ -126,6 +128,7 @@ const PostInfoWrapper = styled.div`
 const ProfileImage = styled.img`
   width: 40px;
   height: 40px;
+  border-radius: 50%;
 `;
 
 const PostWriter = styled.p`
