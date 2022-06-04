@@ -34,7 +34,7 @@ const PostInfo: FunctionComponent<PostInfoProps> = ({
     if (isClick && !menuEl.current.contains(e.target)) setIsClick(false);
   };
 
-  function calculatingTime(time: string) {
+  const calculatingTime = (time: string) => {
     const currentTime = new Date().getTime();
     const writtenTime = new Date(time).getTime();
 

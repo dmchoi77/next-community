@@ -45,7 +45,6 @@ const PostNew: FunctionComponent = () => {
     setImages(temp);
   };
 
-
   const categoryHandler = () => {
     let selecting: any = document.getElementById('categories');
     setCategoryPk(selecting.options[selecting.selectedIndex].value);
@@ -92,9 +91,8 @@ const PostNew: FunctionComponent = () => {
       console.error(err);
     }
 
-    router.push("/");
+    router.push('/');
   };
-
 
   return (
     <PostNewWrapper>
@@ -102,9 +100,7 @@ const PostNew: FunctionComponent = () => {
         <HeaderTitle>글쓰기</HeaderTitle>
       </HeaderWrapper>
       <CategoryBoxWrapper>
-        <CategoryBox
-          categoryHandler={categoryHandler}
-        />
+        <CategoryBox categoryHandler={categoryHandler} />
       </CategoryBoxWrapper>
       <TitleInput
         type="text"
@@ -122,7 +118,7 @@ const PostNew: FunctionComponent = () => {
         onAddImages={onAddImages}
       />
       <FooterWrapper>
-        <CancelButton onClick={() => router.push("/")}>취소</CancelButton>
+        <CancelButton onClick={() => router.push('/')}>취소</CancelButton>
         <WriteButton onClick={() => onPost()}>작성</WriteButton>
       </FooterWrapper>
     </PostNewWrapper>
@@ -208,7 +204,7 @@ const FooterWrapper = styled.div`
   gap: 10px;
 
   padding-top: 15px;
-`
+`;
 
 const CancelButton = styled.button`
   width: 180px;
@@ -221,7 +217,7 @@ const CancelButton = styled.button`
 
   font-weight: 500;
   font-size: 14px;
-`
+`;
 
 const WriteButton = styled.button`
   width: 180px;
@@ -235,4 +231,4 @@ const WriteButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   color: #ffff;
-`
+`;

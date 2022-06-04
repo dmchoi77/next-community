@@ -6,9 +6,8 @@ const TopButton: FunctionComponent = () => {
     <TopButtonWrapper onClick={() => window.scrollTo(0, 0)}>
       <Button src="/images/topicon.png" />
     </TopButtonWrapper>
-  )
-
-}
+  );
+};
 
 export default TopButton;
 
