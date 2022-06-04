@@ -1,5 +1,5 @@
 // 포스팅 상세 페이지 PostDetail
-// UPDATE: 2022-05-28
+// UPDATE: 2022-06-05
 
 import Head from 'next/head';
 import React from 'react';
@@ -10,7 +10,13 @@ import PostInfo from '../../../src/component/List/PostInfo';
 import UserActivity from '../../../src/component/List/UserActivity';
 
 const Post = ({ post }) => {
+  // viewCount(조회수 증가)
+  axios.patch(`http://localhost:4000/posts/${post.id}`, {
+    'viewCount': post.viewCount + 1
+  })
+
   const router = useRouter();
+
   return (
     <>
       <Head>
@@ -44,6 +50,7 @@ const Post = ({ post }) => {
           writerNickName={post.writerNickName}
           categoryName={post.categoryName}
           writtenAt={post.writtenAt}
+          id={post.id}
         />
         <PostTitle>{post.title}</PostTitle>
         <PostContentWrapper>{post.content}</PostContentWrapper>
@@ -74,7 +81,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      post: data,
+      post: data
     },
   };
 }
@@ -106,7 +113,7 @@ const PostTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-`
+`;
 
 const PostContentWrapper = styled.div`
   margin: 10px 0;
