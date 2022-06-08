@@ -18,7 +18,7 @@ const PostButton: FunctionComponent = () => {
 export default PostButton;
 
 const PostButtonWrapper = styled.div`
-  width: 100%;
+  width: fit-content%;
 
   position: fixed;
   right: 0px;

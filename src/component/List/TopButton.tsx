@@ -12,7 +12,7 @@ const TopButton: FunctionComponent = () => {
 export default TopButton;
 
 const TopButtonWrapper = styled.div`
-  width: 100%;
+  width: fit-content%;
 
   position: fixed;
   right: 0px;
