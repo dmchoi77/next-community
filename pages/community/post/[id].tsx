@@ -26,7 +26,7 @@ const Post = ({ post }) => {
       <HeaderWrapper>
         <HeaderButton
           onClick={() => {
-            router.push('/');
+            router.push('/community/list');
           }}
         >
           <svg

@@ -1,5 +1,5 @@
 // 새 포스팅 페이지
-// UPDATE: 2022-06-02
+// UPDATE: 2022-06-09
 
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
@@ -16,15 +16,15 @@ const PostNew: FunctionComponent = () => {
   const [images, setImages] = useState<[]>([]);
   const router = useRouter();
 
-  const onTitleChange = (e: any) => {
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
 
-  const onContentChange = (e: any) => {
+  const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setContent(e.target.value);
   };
 
-  const onAddImages = (e: any) => {
+  const onAddImages = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const nowSelectImageList = e.target.files;
     const nowImageURLList: any = [...images];
 
@@ -37,16 +37,15 @@ const PostNew: FunctionComponent = () => {
     else alert('최대 5개의 이미지 첨부가 가능합니다.');
   };
 
-  const onRemoveImage = (e: any) => {
-    const selectedIndex = e.target.id;
+  const onRemoveImage = (e: React.MouseEvent<HTMLImageElement>): void => {
+    const selectedIndex = Number(e.currentTarget.id);
     let temp: [] = [...images];
     temp.splice(selectedIndex, 1);
-
     setImages(temp);
   };
 
   const categoryHandler = () => {
-    let selecting: any = document.getElementById('categories');
+    let selecting: HTMLElement | any = document.getElementById('categories');
     setCategoryPk(selecting.options[selecting.selectedIndex].value);
     setCategoryName(selecting.options[selecting.selectedIndex].innerHTML);
   };
@@ -84,14 +83,14 @@ const PostNew: FunctionComponent = () => {
         commentCount: 0,
         imageUrl: images,
         writtenAt: currnetTime.slice(0, currnetTime.length - 5),
-        writerNickName: 'dmchoi',
-        writerProfileUrl: '',
+        writerNickName: localStorage.getItem('nickname') || "사용자",
+        writerProfileUrl: localStorage.getItem('profile_image') || `${"/images/user.png"}`,
       });
     } catch (err) {
       console.error(err);
     }
 
-    router.push('/');
+    router.push('/community/list');
   };
 
   return (
@@ -118,7 +117,7 @@ const PostNew: FunctionComponent = () => {
         onAddImages={onAddImages}
       />
       <FooterWrapper>
-        <CancelButton onClick={() => router.push('/')}>취소</CancelButton>
+        <CancelButton onClick={() => router.push('/community/list')}>취소</CancelButton>
         <WriteButton onClick={() => onPost()}>작성</WriteButton>
       </FooterWrapper>
     </PostNewWrapper>
