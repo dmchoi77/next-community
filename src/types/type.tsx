@@ -1,5 +1,5 @@
 // type들을 따로 관리
-// UPDATE: 2022-06-04
+// UPDATE: 2022-06-09
 
 export interface CategoryProps {
   categoryPk: number;
@@ -43,4 +43,10 @@ export interface UserActivityProps {
   viewCount?: number;
   likeCount: number;
   commentCount: number;
+  id?: number;
+}
+
+export interface RemoveButtonProps {
+  onRemoveImage: (e: React.MouseEvent<HTMLImageElement>) => void,
+  id: number
 }
