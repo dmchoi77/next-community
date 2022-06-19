@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
-          <title>개발 커뮤니티</title>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
           <meta charSet="utf-8"></meta>
           <body>
             <Main />
