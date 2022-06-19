@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 const PostNew: FunctionComponent = () => {
   const [categoryPk, setCategoryPk] = useState(0);
-  const [categoryName, setCategoryName] = useState('React');
+  const [categoryName, setCategoryName] = useState('일상');
   const [title, setTitle] = useState<string>();
   const [content, setContent] = useState<string>();
   const [images, setImages] = useState<[]>([]);
@@ -67,11 +67,11 @@ const PostNew: FunctionComponent = () => {
         return;
       }
 
-      const fetchData = (await axios.get(`http://localhost:4000/posts`)).data;
+      const fetchData = (await axios.get(`http://localhost:3000/api/posts`)).data;
       const lastIndex = fetchData[fetchData.length - 1].id;
       let currnetTime = new Date(+new Date() + 3240 * 10000).toISOString();
 
-      axios.post('http://localhost:4000/posts', {
+      axios.post('http://localhost:3000/api/posts', {
         categoryPk: categoryPk,
         categoryName: categoryName,
         pk: lastIndex + 1,

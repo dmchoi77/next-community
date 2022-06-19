@@ -7,7 +7,7 @@ const CategoryBox = ({ categoryHandler }) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/categories')
+      .get('http://localhost:3000/api/categories')
       .then((res) => setCategories(res.data.splice(2, res.data.length)));
   }, []);
 

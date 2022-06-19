@@ -64,7 +64,7 @@ const PostInfo: FunctionComponent<PostInfoProps> = ({
     axios.delete(`http://localhost:4000/posts/${id}`);
 
     alert('삭제되었습니다.');
-    router.push('/');
+    router.push('/community/list');
   };
 
   return (

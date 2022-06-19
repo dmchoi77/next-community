@@ -8,12 +8,12 @@ const CategoryList: FunctionComponent<CategoriesProps> = ({
   const [categories, setCategories] = useState([
     '전체글',
     '인기글',
-    'React',
-    'Vue',
-    'Angular',
-    'JavaScript',
-    'TypeScript',
-    'Redux',
+    '일상',
+    '맛집공유',
+    '패션',
+    '여행',
+    '유머',
+    '잡담',
   ]);
   // 처음 렌더링 시 맨 처음 카테고리가 checked 되게
   useEffect(() => {

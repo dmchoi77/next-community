@@ -11,11 +11,11 @@ import TopButton from '../../src/component/List/TopButton';
 
 const List: FunctionComponent = () => {
   const [posts, setPosts] = useState<PostProps[]>([]);
-  const [selectingPosts, setSelectingPosts] = useState<PostProps[]>([]);
+  const [selectingPosts, setSelectingPosts] = useState<PostProps[]>();
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchPosts = async () => {
-    const postList = await axios.get('http://localhost:4000/posts');
+    const postList = await axios.get('http://localhost:3000/api/posts');
     setPosts(postList.data);
     setSelectingPosts(postList.data);
     setIsLoading(false);
